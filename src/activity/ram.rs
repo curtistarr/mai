@@ -1,5 +1,6 @@
 use std::str::FromStr;
 
+#[derive(PartialEq, Debug)]
 pub struct RAM {
     pub used: u32,
     pub wired: u32,
@@ -23,5 +24,18 @@ impl FromStr for RAM {
         let unused = usages.next().unwrap();
 
         Ok(RAM { used, wired, unused })
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_from_str() {
+        let activity = "PhysMem: 7515M used (1430M wired), 135M unused.";
+        let ram = RAM::from_str(activity).unwrap();
+
+        assert_eq!(ram, RAM { used: 7515, wired: 1430, unused: 135 });
     }
 }

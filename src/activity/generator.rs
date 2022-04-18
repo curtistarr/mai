@@ -5,7 +5,9 @@ use crate::activity::cpu::CPU;
 use crate::activity::ram::RAM;
 
 pub fn get_activity() -> String {
-    return parse_top_to_activity(run_top());
+    let top_output = run_top();
+    let output_string = String::from_utf8(top_output.stdout).unwrap();
+    return parse_output_to_activity(output_string);
 }
 
 fn run_top() -> Output {
@@ -16,9 +18,7 @@ fn run_top() -> Output {
         .unwrap_or_else(|e| { panic!("failed to execute top: {}", e) });
 }
 
-fn parse_top_to_activity(top: Output) -> String {
-    let output_string = String::from_utf8(top.stdout).unwrap();
-
+fn parse_output_to_activity(output_string: String) -> String {
     let lines = output_string.split("\n");
 
     let mut cpu_found = false;
@@ -42,4 +42,17 @@ fn parse_top_to_activity(top: Output) -> String {
     }
 
     return format!("{:.2}% {}MB", cpu.user + cpu.system, ram.used);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_parse_top_to_activity() {
+        let output = String::from("CPU usage: 8.82% user, 14.70% sys, 76.47% idle\nPhysMem: 7515M used (1430M wired), 135M unused.");
+        let activity = parse_output_to_activity(output);
+
+        assert_eq!(activity, String::from("23.52% 7515MB"));
+    }
 }

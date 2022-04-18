@@ -7,7 +7,6 @@ description = "Mac Activity Indicator is a menu bar application to show activity
 repository = "https://github.com/tarrcurtis/mai"
 readme = "README.md"
 license = "MIT"
-license-file = "LICENSE"
 
 [dependencies]
 cocoa = "0.24"
