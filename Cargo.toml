@@ -3,11 +3,10 @@ name = "mai"
 version = "0.1.0"
 edition = "2021"
 authors = ["Curtis Tarr"]
-description = "Mac Activity Indicator is a menu bar application to show activity stats"
+description = "MAI (Mac Activity Indicator) is a menu bar application to show activity stats"
 repository = "https://github.com/tarrcurtis/mai"
 readme = "README.md"
 license = "MIT"
-license-file = "LICENSE"
 
 [dependencies]
 cocoa = "0.24"
