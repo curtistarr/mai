@@ -1,6 +1,6 @@
 [package]
 name = "mai"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Curtis Tarr"]
 description = "MAI (Mac Activity Indicator) is a menu bar application to show activity stats"

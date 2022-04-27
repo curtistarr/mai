@@ -34,7 +34,7 @@ fn parse_output(vm_stat_output_string: &str) -> Captures {
     lazy_static! {
         static ref REGEX: Regex = Regex::new(r"CPU usage: (?P<user>.*)% user, (?P<sys>.*)% sys, (?P<idle>.*)% idle").unwrap();
     }
-    return REGEX.captures(vm_stat_output_string).unwrap();
+    return REGEX.captures_iter(vm_stat_output_string).last().unwrap();
 }
 
 #[cfg(test)]
@@ -52,7 +52,7 @@ mod tests {
 
         let cpu = CPU::from_str(&*top_output_string).unwrap();
 
-        assert_eq!(cpu, CPU { user: 3.9, system: 11.34, idle: 85.56 });
+        assert_eq!(cpu, CPU { user: 8.67, system: 8.8, idle: 83.23 });
     }
 
     #[test]

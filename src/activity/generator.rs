@@ -20,11 +20,11 @@ pub fn get_activity() -> String {
 fn run_top() -> Output {
     return Command::new("top")
         .arg("-l")
-        .arg("1")
+        .arg("2") // 2 samples for improved CPU accuracy
         .arg("-s")
-        .arg("0")
+        .arg("1") // 1 second between samples
         .arg("-n")
-        .arg("0")
+        .arg("0") // Don't list processes to increase parsing speed
         .output()
         .unwrap_or_else(|e| { panic!("failed to execute top: {}", e) });
 }
