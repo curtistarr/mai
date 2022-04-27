@@ -1,3 +1,5 @@
+use std::panic;
+use std::process;
 use std::thread;
 use std::time::Duration;
 
@@ -16,6 +18,12 @@ mod activity;
 
 fn main() {
     unsafe {
+        let panic_hook = panic::take_hook();
+        panic::set_hook(Box::new(move |panic_info| {
+            panic_hook(panic_info);
+            process::exit(1);
+        }));
+
         let app = NSApp();
         app.setActivationPolicy_(NSApplicationActivationPolicyProhibited);
 
@@ -40,7 +48,7 @@ unsafe fn create_menu(status_item: id) {
 
 unsafe fn start_activity_update_thread(status_item: id) {
     let button_ptr = status_item.button() as u64;
-    let three_secs = Duration::from_secs(3);
+    let one_sec = Duration::from_secs(1);
 
     thread::spawn(move || {
         let btn = button_ptr as id;
@@ -48,7 +56,7 @@ unsafe fn start_activity_update_thread(status_item: id) {
             let activity = activity::get_activity();
             let title = create_string(&*activity);
             btn.setTitle_(title);
-            thread::sleep(three_secs);
+            thread::sleep(one_sec);
         }
     });
 }
