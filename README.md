@@ -7,7 +7,7 @@ MAI (Mac Activity Indicator) is a menu bar application to show activity stats li
 ## Requirements
 
 The only requirements for this project are `Rust` and `Cargo`.  
-Both can be installed with `Rustup`: https://www.rust-lang.org/learn/get-started
+Both can be installed with `Rustup`: https://www.rust-lang.org/tools/install
 
 ## Commands
 

@@ -1,41 +1,64 @@
 use std::str::FromStr;
 
+use lazy_static::lazy_static;
+use regex::{Captures, Regex};
+
 #[derive(PartialEq, Debug)]
 pub struct CPU {
-    pub user: f64,
-    pub system: f64,
-    pub idle: f64,
+    pub user: f32,
+    pub system: f32,
+    pub idle: f32,
 }
 
+impl CPU {
+    pub fn get_usage(&self) -> f32 {
+        return self.user + self.system;
+    }
+}
 
 impl FromStr for CPU {
-    type Err = std::num::ParseIntError;
+    type Err = regex::Error;
 
-    // Parses CPU usage from TOP into an instance of CPU
-    // format = 'CPU usage: 8.82% user, 14.70% sys, 76.47% idle'
-    fn from_str(top_cpu_usage: &str) -> Result<Self, Self::Err> {
-        let mut usages = top_cpu_usage.split_whitespace()
-            .filter(|s| s.ends_with("%"))
-            .map(|s| s.strip_suffix("%").unwrap())
-            .map(|s| s.parse::<f64>().unwrap());
+    fn from_str(top_output_string: &str) -> Result<Self, Self::Err> {
+        let parsed_output = parse_output(top_output_string);
 
-        let user = usages.next().unwrap();
-        let system = usages.next().unwrap();
-        let idle = usages.next().unwrap();
+        let user = parsed_output["user"].parse::<f32>().unwrap();
+        let system = parsed_output["sys"].parse::<f32>().unwrap();
+        let idle = parsed_output["idle"].parse::<f32>().unwrap();
 
         Ok(CPU { user, system, idle })
     }
 }
 
+fn parse_output(vm_stat_output_string: &str) -> Captures {
+    lazy_static! {
+        static ref REGEX: Regex = Regex::new(r"CPU usage: (?P<user>.*)% user, (?P<sys>.*)% sys, (?P<idle>.*)% idle").unwrap();
+    }
+    return REGEX.captures_iter(vm_stat_output_string).last().unwrap();
+}
+
 #[cfg(test)]
 mod tests {
+    use std::fs;
+    use std::path::PathBuf;
+
     use super::*;
 
     #[test]
     fn test_from_str() {
-        let activity = "CPU usage: 8.82% user, 14.70% sys, 76.47% idle";
-        let cpu = CPU::from_str(activity).unwrap();
+        let mut file_path = PathBuf::from(env!("CARGO_MANIFEST_DIR"));
+        file_path.push("resources/test/top-output.txt");
+        let top_output_string = fs::read_to_string(file_path).unwrap();
 
-        assert_eq!(cpu, CPU { user: 8.82, system: 14.70, idle: 76.47 });
+        let cpu = CPU::from_str(&*top_output_string).unwrap();
+
+        assert_eq!(cpu, CPU { user: 8.67, system: 8.8, idle: 83.23 });
+    }
+
+    #[test]
+    fn test_get_usage() {
+        let cpu = CPU { user: 3.9, system: 11.34, idle: 85.56 };
+
+        assert_eq!(cpu.get_usage(), 15.24)
     }
 }
