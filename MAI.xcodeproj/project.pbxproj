@@ -14,7 +14,7 @@
 		1E7BCCE1281D904900F39F06 /* LICENSE.md in Resources */ = {isa = PBXBuildFile; fileRef = 1E7BCCE0281D904900F39F06 /* LICENSE.md */; };
 		1E7BCCE3281D905600F39F06 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 1E7BCCE2281D905600F39F06 /* README.md */; };
 		1E7BCCE5281D906200F39F06 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 1E7BCCE4281D906200F39F06 /* .gitignore */; };
-		1E7BCCF4281D921600F39F06 /* resources in Resources */ = {isa = PBXBuildFile; fileRef = 1E7BCCF3281D921600F39F06 /* resources */; };
+		1E7BCCF4281D921600F39F06 /* Resources in Resources */ = {isa = PBXBuildFile; fileRef = 1E7BCCF3281D921600F39F06 /* Resources */; };
 		1EE1D02C281ED79E0042652E /* Main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EE1D02B281ED79E0042652E /* Main.swift */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +31,8 @@
 		1E7BCCE4281D906200F39F06 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		1E7BCCE6281D906900F39F06 /* .github */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .github; sourceTree = "<group>"; };
 		1E7BCCE8281D907300F39F06 /* .git */ = {isa = PBXFileReference; lastKnownFileType = folder; path = .git; sourceTree = "<group>"; };
-		1E7BCCF3281D921600F39F06 /* resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = resources; sourceTree = "<group>"; };
-		1EE1D02B281ED79E0042652E /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Main.swift; path = ../../../../.Trash/Main.swift; sourceTree = "<group>"; };
+		1E7BCCF3281D921600F39F06 /* Resources */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Resources; sourceTree = "<group>"; };
+		1EE1D02B281ED79E0042652E /* Main.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,7 +58,7 @@
 		1E730987281D8F1C008F24D8 = {
 			isa = PBXGroup;
 			children = (
-				1E7BCCF3281D921600F39F06 /* resources */,
+				1E7BCCF3281D921600F39F06 /* Resources */,
 				1E7BCCE8281D907300F39F06 /* .git */,
 				1E7BCCE6281D906900F39F06 /* .github */,
 				1E7BCCE4281D906200F39F06 /* .gitignore */,
@@ -151,7 +151,7 @@
 				1E7BCCE5281D906200F39F06 /* .gitignore in Resources */,
 				1E7BCCE1281D904900F39F06 /* LICENSE.md in Resources */,
 				1E7BCCE3281D905600F39F06 /* README.md in Resources */,
-				1E7BCCF4281D921600F39F06 /* resources in Resources */,
+				1E7BCCF4281D921600F39F06 /* Resources in Resources */,
 				1E730998281D8F1D008F24D8 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
